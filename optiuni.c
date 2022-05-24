@@ -52,3 +52,8 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
         Comanda *aux = Lista_Comenzi->Comanda;
     }
 }
+
+void adaugarecomanda(Lista_Comenzi** listacomanda){
+    (*listacomanda)->nr_comenzi++;
+    
+}
