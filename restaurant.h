@@ -1,9 +1,9 @@
 #include <stdio.h>
 typedef struct Comanda
 {
-    int status;    // statusul unei comenzi
-    int pret;      // pretul unei comenzi
-    int *articole; // primul articol al comenzii
+    int status;        // statusul unei comenzi
+    int pret;          // pretul unei comenzi
+    Articol *articole; // primul articol al comenzii
 } Comanda;
 
 typedef struct Lista_Comenzi

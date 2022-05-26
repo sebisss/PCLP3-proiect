@@ -42,3 +42,13 @@ void afisaremeniu(Meniu *meniu)
         articol = articol->next;
     }
 }
+void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
+{
+    if (nrcomanda > Lista_Comenzi->nr_comenzi)
+        return 0;
+    for (int i = 0; i < nrcomanda; i++)
+    {
+
+        Comanda *aux = Lista_Comenzi->Comanda;
+    }
+}
