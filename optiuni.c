@@ -53,8 +53,14 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
         aux = Lista_Comenzi->Comanda;
         aux = aux->next;
     }
-    if (aux->status == 0)
-        printf("%d")
+    printf("Pretul total este: %d", aux->pret);
+    printf("\n");
+    while (aux->articole != NULL)
+    {
+        printf("Produs: %s\n", aux->articole->nume);
+        printf("Pret: %d\n", aux->articole->pret);
+        aux->articole = aux->articole->next;
+    }
 }
 
 void adaugarecomanda(Lista_Comenzi **listacomanda)
