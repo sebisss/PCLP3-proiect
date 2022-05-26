@@ -1,10 +1,10 @@
 #include <stdio.h>
 typedef struct Comanda
 {
-       int status;        // statusul unei comenzi
-    int pret;          // pretul unei comenzi
-    Articol *articole; // primul articol al comenzii
-    Comanda *next;
+    int status;               // statusul unei comenzi
+    int pret;                 // pretul unei comenzi
+    struct Articol *articole; // primul articol al comenzii
+    struct Comanda *next;
 } Comanda;
 
 typedef struct Lista_Comenzi
@@ -33,4 +33,4 @@ void afisaremeniu(Meniu *meniu);
 void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda);
 void adaugarearticol(Comanda **comanda, int k, Meniu *meniu);
 Comanda *plasare();
-void adaugarecomanda(Lista_Comenzi **listacomanda);
+void adaugarecomanda(Lista_Comenzi **listacomanda, Meniu *meniu);
