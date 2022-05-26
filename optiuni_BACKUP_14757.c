@@ -53,11 +53,15 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
         aux = Lista_Comenzi->Comanda;
         aux = aux->next;
     }
+<<<<<<< HEAD
     if (aux->status == 0)
         printf("%d")
 }
-
-void adaugarecomanda(Lista_Comenzi **listacomanda)
-{
-    (*listacomanda)->nr_comenzi++;
+=======
 }
+
+void adaugarecomanda(Lista_Comenzi** listacomanda){
+    (*listacomanda)->nr_comenzi++;
+    
+}
+>>>>>>> 8f3a159426894f484bdf52b0e249e3ecb271d311

@@ -46,18 +46,14 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
 {
     if (nrcomanda > Lista_Comenzi->nr_comenzi)
         return 0;
-    Comanda *aux;
     for (int i = 0; i < nrcomanda; i++)
     {
 
-        aux = Lista_Comenzi->Comanda;
-        aux = aux->next;
+        Comanda *aux = Lista_Comenzi->Comanda;
     }
-    if (aux->status == 0)
-        printf("%d")
 }
 
-void adaugarecomanda(Lista_Comenzi **listacomanda)
-{
+void adaugarecomanda(Lista_Comenzi** listacomanda){
     (*listacomanda)->nr_comenzi++;
+    
 }
