@@ -3,9 +3,42 @@
 #include <string.h>
 
 #include "restaurant.h"
-
-Meniu init_meniu(FILE *f)
+#define NR_MAX 20
+Meniu *init_meniu(FILE *f)
 {
     Meniu *meniu = (Meniu *)malloc(sizeof(Meniu));
-    meniu->numar_articole = fscanf(f, "%d", 1);
+    fscanf(f, "%d\n", &meniu->numar_articole);
+    meniu->articole = NULL;
+    Articol *prev = NULL;
+    for (int i = meniu->numar_articole; i > 0; i--)
+    {
+        Articol *articol = malloc(sizeof(Articol));
+        articol->nume = malloc(NR_MAX);
+        fscanf(f, "%s ", articol->nume);
+        fscanf(f, "%d ", &articol->pret);
+        fscanf(f, "%d\n", &articol->numar);
+        if (prev == NULL)
+        {
+            meniu->articole = articol;
+        }
+        else
+        {
+            prev->next = articol;
+        }
+        prev = articol;
+    }
+    prev->next = NULL;
+    return meniu;
+}
+
+void afisaremeniu(Meniu *meniu)
+{
+    Articol *articol = meniu->articole;
+    for (int i = meniu->numar_articole; i > 0; i--)
+    {
+        printf("%s ", articol->nume);
+        printf("%d ", articol->pret);
+        printf("%d\n", articol->numar);
+        articol = articol->next;
+    }
 }
