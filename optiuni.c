@@ -46,11 +46,11 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
 {
     if (nrcomanda > Lista_Comenzi->nr_comenzi)
         return;
-    Comanda *aux;
+    Comanda *aux =  Lista_Comenzi->Comanda;
     for (int i = 0; i < nrcomanda; i++)
     {
 
-        aux = Lista_Comenzi->Comanda;
+       // aux = Lista_Comenzi->Comanda;
         aux = aux->next;
     }
     printf("Pretul total este: %d", aux->pret);
@@ -68,7 +68,7 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
 Lista_Comenzi* adaugarecomanda(Lista_Comenzi* listacomanda, Meniu *meniu){
     printf("%d nr comanda", listacomanda->nr_comenzi);
     listacomanda->nr_comenzi = listacomanda->nr_comenzi + 1;
-    int c = listacomanda->nr_comenzi;
+    
     Comanda *aux = listacomanda->Comanda;
     if(listacomanda->Comanda != NULL)
     while(aux->next != NULL)
@@ -84,13 +84,14 @@ Lista_Comenzi* adaugarecomanda(Lista_Comenzi* listacomanda, Meniu *meniu){
         
         if(strcmp(c, "nu") == 0) break;
         printf("ce ti dau");
-        int b;
-        scanf("%d", &b);
+        int *b = malloc(sizeof(int));
+        scanf("%d", b);
         printf("%d nr comanda", listacomanda->nr_comenzi);
-        newcommand = adaugarearticol(newcommand, b,  meniu);
+        newcommand = adaugarearticol(newcommand, *b,  meniu);
         printf("%d nr comanda", listacomanda->nr_comenzi);
+        free(b);
     }
-    
+    printf("%d nr comanda", listacomanda->nr_comenzi);
     if(listacomanda->Comanda != NULL)
     aux->next = newcommand;
     else listacomanda->Comanda = newcommand;
