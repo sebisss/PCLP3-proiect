@@ -46,11 +46,11 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
 {
     if (nrcomanda > Lista_Comenzi->nr_comenzi)
         return;
-    Comanda *aux =  Lista_Comenzi->Comanda;
+    Comanda *aux = Lista_Comenzi->Comanda;
     for (int i = 0; i < nrcomanda; i++)
     {
 
-       // aux = Lista_Comenzi->Comanda;
+        // aux = Lista_Comenzi->Comanda;
         aux = aux->next;
     }
     printf("Pretul total este: %d", aux->pret);
@@ -63,80 +63,113 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
     }
 }
 
-
-
-Lista_Comenzi* adaugarecomanda(Lista_Comenzi* listacomanda, Meniu *meniu){
+Lista_Comenzi *adaugarecomanda(Lista_Comenzi *listacomanda, Meniu *meniu)
+{
     printf("%d nr comanda", listacomanda->nr_comenzi);
     listacomanda->nr_comenzi = listacomanda->nr_comenzi + 1;
-    
+
     Comanda *aux = listacomanda->Comanda;
-    if(listacomanda->Comanda != NULL)
-    while(aux->next != NULL)
-        aux = aux->next;
+    if (listacomanda->Comanda != NULL)
+        while (aux->next != NULL)
+            aux = aux->next;
 
     printf("%d nr comanda ba", listacomanda->nr_comenzi);
     Comanda *newcommand = plasare();
     printf("%d nr comanda", listacomanda->nr_comenzi);
-    while(1){
+    while (1)
+    {
         char *c = malloc(sizeof(4));
         printf("mai doresti cv bossule:\n");
         scanf("%s", c);
-        
-        if(strcmp(c, "nu") == 0) break;
+
+        if (strcmp(c, "nu") == 0)
+            break;
         printf("ce ti dau");
         int *b = malloc(sizeof(int));
         scanf("%d", b);
         printf("%d nr comanda", listacomanda->nr_comenzi);
-        newcommand = adaugarearticol(newcommand, *b,  meniu);
+        newcommand = adaugarearticol(newcommand, *b, meniu);
         printf("%d nr comanda", listacomanda->nr_comenzi);
         free(b);
     }
     printf("%d nr comanda", listacomanda->nr_comenzi);
-    if(listacomanda->Comanda != NULL)
-    aux->next = newcommand;
-    else listacomanda->Comanda = newcommand;
-    //printf("%d", newcommand->articole->pret);
+    if (listacomanda->Comanda != NULL)
+        aux->next = newcommand;
+    else
+        listacomanda->Comanda = newcommand;
+    // printf("%d", newcommand->articole->pret);
     return listacomanda;
 }
 
-Comanda *plasare(){
-    
-    Comanda *newcommand = (Comanda *) malloc(sizeof(Comanda));
+Comanda *plasare()
+{
+
+    Comanda *newcommand = (Comanda *)malloc(sizeof(Comanda));
     newcommand->status = 0;
     newcommand->pret = 0;
     newcommand->articole = NULL;
     return newcommand;
 }
 
-Comanda  *adaugarearticol(Comanda *comanda, int k, Meniu* meniu){
+Comanda *adaugarearticol(Comanda *comanda, int k, Meniu *meniu)
+{
     Articol *articol = meniu->articole;
-    while(k > 0){
+    while (k > 0)
+    {
         articol = articol->next;
         k--;
     }
-    //if(meniu->articole == NULL) printf("Da");
-    
-    Articol *newarticol =(Articol *) malloc(sizeof(Articol));
-    
-    if(meniu->articole != NULL){ 
-    newarticol->pret = articol->pret;
-    newarticol->nume = malloc(sizeof(20));
-    strcpy(newarticol->nume, articol->nume);
-    newarticol->numar = articol->numar;
+    // if(meniu->articole == NULL) printf("Da");
+
+    Articol *newarticol = (Articol *)malloc(sizeof(Articol));
+
+    if (meniu->articole != NULL)
+    {
+        newarticol->pret = articol->pret;
+        newarticol->nume = malloc(sizeof(20));
+        strcpy(newarticol->nume, articol->nume);
+        newarticol->numar = articol->numar;
     }
-   // int counter = 0;
+    // int counter = 0;
 
     Articol *finalarticole = comanda->articole;
-    while(comanda->articole != NULL && finalarticole->next != NULL){
+    while (comanda->articole != NULL && finalarticole->next != NULL)
+    {
         finalarticole = finalarticole->next;
-    //    counter++;
+        //    counter++;
     }
-    if(comanda->articole != NULL) finalarticole->next = newarticol;
-    else comanda->articole = newarticol;
+    if (comanda->articole != NULL)
+        finalarticole->next = newarticol;
+    else
+        comanda->articole = newarticol;
     comanda->pret = comanda->pret + newarticol->pret;
     printf("%s", comanda->articole->nume);
     return comanda;
-    
-
-
+}
+Lista_Comenzi anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
+{
+    if (nr_comanda < Lista_de_comenzi->nr_comenzi)
+    {
+        Comanda *aux = Lista_de_comenzi->Comanda;
+        Comanda *aux2;
+        Lista_de_comenzi->nr_comenzi--;
+        for (int i = 0; i < nr_comanda; i++)
+        {
+            aux = aux->next;
+            if (i == nr_comanda - 2)
+                aux2 = aux;
+        }
+        Comanda *aux3 = aux;
+        aux = aux->next;
+        aux2->next = aux;
+        while (aux3->articole != NULL)
+        {
+            Articol *aux_articol = aux3->articole;
+            aux3->articole = aux->articole->next;
+            free(aux_articol);
+        }
+        free(aux3);
+    }
+    else
+        printf("Nu exista comanda bosule, prea mare valoare ai");
 }
