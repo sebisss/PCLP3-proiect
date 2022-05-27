@@ -1,7 +1,7 @@
 #include <stdio.h>
 typedef struct Comanda
 {
-    //   int status;        // statusul unei comenzi
+       int status;        // statusul unei comenzi
     int pret;          // pretul unei comenzi
     Articol *articole; // primul articol al comenzii
     Comanda *next;

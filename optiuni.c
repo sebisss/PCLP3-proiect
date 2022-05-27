@@ -112,13 +112,24 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
     }
 }
 
-void adaugarecomanda(Lista_Comenzi** listacomanda){
+void adaugarecomanda(Lista_Comenzi** listacomanda, Meniu *meniu){
     (*listacomanda)->nr_comenzi++;
     Comanda *aux = (*listacomanda)->Comanda;
     while(aux->next != NULL){
         aux = aux->next;
     }
     Comanda *newcommand = plasare();
+    while(1){
+        char *c = malloc(sizeof(4));
+        scanf("%s", c);
+        printf("mai doresti cv bossule:\n");
+        if(strcmp(c, "nu") == 0) break;
+        printf("ce ti dau");
+        int b;
+        scanf("%d", &b);
+        adaugarearticol(&newcommand, b,  meniu);
+         
+    }
     aux->next = newcommand;
 
     
