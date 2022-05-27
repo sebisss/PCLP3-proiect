@@ -10,6 +10,13 @@ int main()
     printf("%s", meniu->articole->nume);
     printf("\n\n");
     afisaremeniu(meniu);
-    void afisarecomanda(Lista_Comenzi * Lista_Comenzi, int nrcomanda);
+    Lista_Comenzi *ceva; 
+    ceva= (Lista_Comenzi *)malloc(sizeof(Lista_Comenzi));
+    ceva->nr_comenzi = 0;
+    ceva->Comanda = NULL;
+    printf("sal");
+    fflush(stdout);
+    adaugarecomanda(&ceva, meniu);
+
     return 0;
 }

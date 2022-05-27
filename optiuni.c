@@ -44,6 +44,8 @@ void afisaremeniu(Meniu *meniu)
 }
 void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
 {
+    if (nrcomanda > Lista_Comenzi->nr_comenzi)
+        return;
     Comanda *aux;
     for (int i = 0; i < nrcomanda; i++)
     {
@@ -61,59 +63,71 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
     }
 }
 
-void adaugarecomanda(Lista_Comenzi **listacomanda, Meniu *meniu)
-{
+
+
+void adaugarecomanda(Lista_Comenzi** listacomanda, Meniu *meniu){
+    
     (*listacomanda)->nr_comenzi++;
     Comanda *aux = (*listacomanda)->Comanda;
-    while (aux->next != NULL)
-    {
+    if((*listacomanda)->Comanda != NULL)
+    while(aux->next != NULL)
         aux = aux->next;
-    }
+
+   
     Comanda *newcommand = plasare();
-    while (1)
-    {
+    while(1){
         char *c = malloc(sizeof(4));
-        scanf("%s", c);
         printf("mai doresti cv bossule:\n");
-        if (strcmp(c, "nu") == 0)
-            break;
+        scanf("%s", c);
+        
+        if(strcmp(c, "nu") == 0) break;
         printf("ce ti dau");
         int b;
         scanf("%d", &b);
-        adaugarearticol(&newcommand, b, meniu);
+        adaugarearticol(&newcommand, b,  meniu);
+         
     }
-    aux->next = newcommand;
+   if((*listacomanda)->Comanda != NULL) aux->next = newcommand;
+
+    
 }
 
-Comanda *plasare()
-{
-
-    Comanda *newcommand = (Comanda *)malloc(sizeof(Comanda));
+Comanda *plasare(){
+    
+    Comanda *newcommand = (Comanda *) malloc(sizeof(Comanda));
     newcommand->status = 0;
     newcommand->pret = 0;
     newcommand->articole = NULL;
     return newcommand;
 }
 
-void adaugarearticol(Comanda **comanda, int k, Meniu *meniu)
-{
+void adaugarearticol(Comanda **comanda, int k, Meniu* meniu){
     Articol *articol = meniu->articole;
-    while (k > 0)
-    {
+    while(k > 0){
         articol = articol->next;
+        k--;
     }
-    Articol *newarticol = (Articol *)malloc(sizeof(Articol));
+    //if(meniu->articole == NULL) printf("Da");
+    
+    Articol *newarticol =(Articol *) malloc(sizeof(Articol));
+    
+    if(meniu->articole != NULL){ 
     newarticol->pret = articol->pret;
+    newarticol->nume = malloc(sizeof(20));
     strcpy(newarticol->nume, articol->nume);
     newarticol->numar = articol->numar;
-    // int counter = 0;
+    }
+   // int counter = 0;
 
     Articol *finalarticole = (*comanda)->articole;
-    while (finalarticole->next != NULL)
-    {
+    while((*comanda)->articole != NULL && finalarticole->next != NULL){
         finalarticole = finalarticole->next;
-        //    counter++;
+    //    counter++;
     }
-    finalarticole->next = newarticol;
+    if((*comanda)->articole != NULL) finalarticole->next = newarticol;
     (*comanda)->pret = (*comanda)->pret + newarticol->pret;
+    
+    
+
+
 }
