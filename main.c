@@ -27,7 +27,7 @@ int main()
         printf("Tasta 6 - Iesire\n");
         printf("\n\n");
 
-    while (n != 6)
+    while (n != 6 || n < 0 || n > 6)
     {  
         scanf("%d", &n);
         if (n == 1)

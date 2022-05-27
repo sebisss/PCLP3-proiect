@@ -166,9 +166,9 @@ Lista_Comenzi  *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
         }
         Lista_de_comenzi->nr_comenzi--;
         aux2->next = NULL;
-        return NULL;
+        return Lista_de_comenzi;
     }
-    else if (nr_comanda == 0)
+    if (nr_comanda == 0)
     {
         aux2 = aux;
         aux = aux->next;
@@ -183,7 +183,7 @@ Lista_Comenzi  *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
         if (aux2 != NULL)
             free(aux2);
         Lista_de_comenzi->nr_comenzi--;
-        return NULL;
+        return Lista_de_comenzi;
     }
     else{
     Lista_de_comenzi->nr_comenzi--;
@@ -207,5 +207,5 @@ Lista_Comenzi  *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
     if (aux3 != NULL)
         free(aux3);
 
-    return NULL; }
+    return Lista_de_comenzi; }
 }
