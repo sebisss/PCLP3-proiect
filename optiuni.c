@@ -145,7 +145,7 @@ Comanda *adaugarearticol(Comanda *comanda, int k, Meniu *meniu)
     printf("%s", comanda->articole->nume);
     return comanda;
 }
-Lista_Comenzi *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
+Lista_Comenzi  *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
 {
     Comanda *aux = Lista_de_comenzi->Comanda;
     Comanda *aux2;
@@ -166,7 +166,7 @@ Lista_Comenzi *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
         }
         Lista_de_comenzi->nr_comenzi--;
         aux2->next = NULL;
-        return Lista_de_comenzi;
+        return NULL;
     }
     else if (nr_comanda == 0)
     {
@@ -183,8 +183,9 @@ Lista_Comenzi *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
         if (aux2 != NULL)
             free(aux2);
         Lista_de_comenzi->nr_comenzi--;
-        return Lista_de_comenzi;
+        return NULL;
     }
+    else{
     Lista_de_comenzi->nr_comenzi--;
     for (int i = 0; i < nr_comanda; i++)
     {
@@ -206,5 +207,5 @@ Lista_Comenzi *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
     if (aux3 != NULL)
         free(aux3);
 
-    return Lista_de_comenzi;
+    return NULL; }
 }
