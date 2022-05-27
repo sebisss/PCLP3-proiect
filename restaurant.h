@@ -35,3 +35,4 @@ Comanda *adaugarearticol(Comanda *comanda, int k, Meniu *meniu);
 Comanda *plasare();
 Lista_Comenzi *adaugarecomanda(Lista_Comenzi *listacomanda, Meniu *meniu);
 Lista_Comenzi *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda);
+void freemeniu(Meniu *meniu);

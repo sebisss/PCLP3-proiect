@@ -56,7 +56,7 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
     for (int i = 0; i < nrcomanda; i++)
     {
 
-        // aux = Lista_Comenzi->Comanda;
+        
         aux = aux->next;
     }
     Articol *aux2 = aux->articole;
@@ -80,7 +80,7 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
 
 Lista_Comenzi *adaugarecomanda(Lista_Comenzi *listacomanda, Meniu *meniu)
 {
-    // printf("%d nr comanda", listacomanda->nr_comenzi);
+  
     listacomanda->nr_comenzi = listacomanda->nr_comenzi + 1;
 
     Comanda *aux = listacomanda->Comanda;
@@ -88,7 +88,7 @@ Lista_Comenzi *adaugarecomanda(Lista_Comenzi *listacomanda, Meniu *meniu)
         while (aux->next != NULL)
             aux = aux->next;
     Comanda *newcommand = plasare();
-    //   printf("%d nr comanda", listacomanda->nr_comenzi);
+  
     while (1)
     {
         char *c = malloc(sizeof(4));
@@ -107,17 +107,17 @@ Lista_Comenzi *adaugarecomanda(Lista_Comenzi *listacomanda, Meniu *meniu)
         if (*b == 0)
             break;
 
-        //  printf("%d nr comanda", listacomanda->nr_comenzi);
+        
         (*b)--;
         newcommand = adaugarearticol(newcommand, *b, meniu);
         free(b);
     }
-    // printf("%d nr comanda", listacomanda->nr_comenzi);
+  
     if (listacomanda->Comanda != NULL)
         aux->next = newcommand;
     else
         listacomanda->Comanda = newcommand;
-    // printf("%d", newcommand->articole->pret);
+   
     printf("Numarul comenzii este: %d\n", listacomanda->nr_comenzi);
     return listacomanda;
 }
@@ -140,7 +140,7 @@ Comanda *adaugarearticol(Comanda *comanda, int k, Meniu *meniu)
         articol = articol->next;
         k--;
     }
-    // if(meniu->articole == NULL) printf("Da");
+ 
 
     Articol *newarticol = (Articol *)malloc(sizeof(Articol));
 
@@ -151,13 +151,13 @@ Comanda *adaugarearticol(Comanda *comanda, int k, Meniu *meniu)
         strcpy(newarticol->nume, articol->nume);
         newarticol->numar = articol->numar;
     }
-    // int counter = 0;
+  
 
     Articol *finalarticole = comanda->articole;
     while (comanda->articole != NULL && finalarticole->next != NULL)
     {
         finalarticole = finalarticole->next;
-        //    counter++;
+       
     }
     if (comanda->articole != NULL)
         finalarticole->next = newarticol;
@@ -232,4 +232,16 @@ Lista_Comenzi *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
 
         return Lista_de_comenzi;
     }
+}
+
+
+void freemeniu(Meniu *meniu){
+    Articol *aux = meniu->articole;
+    Articol *prev = NULL;
+    while(aux != NULL){
+        prev = aux;
+        aux = aux->next;
+        free(prev);
+    } 
+    free(meniu);
 }

@@ -1,7 +1,9 @@
 6
-Chicken_Nugeti 453 1
-Shaworma 15 2
+CrispyStrips 453 1
+Shaorma 15 2
 Falafel 24 3
 Pizza 25 4
 Mc_Puisor 5 5
-Acadele 1 6
+Suc 1 6
+Apa 2 7
+Sarmale 20 8

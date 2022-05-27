@@ -9,10 +9,10 @@ int main()
     Meniu *meniu = init_meniu(f);
     Lista_Comenzi *Lista_de_comenzi = (Lista_Comenzi *)malloc(sizeof(Lista_Comenzi));
     int n = 0;
-   // fclose(f);
+  
    printf("INFO: Pentru a incheia programul folositi username-ul 'logout'\n\n ");
    while (1){
-    //printf("INFO: Pentru a incheia programul folositi username-ul 'logout'\n\n ");
+    
     printf("Introduceti username:\n");
     char *user = malloc(sizeof(7));
     scanf("%s", user);
@@ -32,8 +32,7 @@ int main()
         printf("Tasta 6 - Iesire\n");
         printf("\n\n");
 
-    //while (n != 6 || n < 0 || n > 6)
-   // {  
+     
         printf("Ce doriti sa faceti?\n");
         scanf("%d", &n);
         if (n == 1)
@@ -82,25 +81,23 @@ int main()
 
 
         
-       // while(n != 4){
-        //printf("Ce doriti sa faceti?\n");
+      
         printf("\nCe doriti sa faceti?\n");
         scanf("%d", &n);
-       // if(n != 0) printf("Ce doriti sa faceti?\n");
+     
         if(n == 1){
 
         }
 
         if(n == 2){
             meniu->numar_articole = meniu->numar_articole + 1;
-           // adaugarearticol(meniu, meniu->numar_articole, )
-           //char *numenou = (char*) malloc(sizeof(20));
+           
            Articol *newarticol = (Articol *) malloc(sizeof(Articol));
             newarticol->nume = (char*) malloc(sizeof(20));
            printf("Numele noului articol din meniu:\n");
            scanf("%s", newarticol->nume);
            printf("Pretul noului articol:");
-          // int *pret = malloc(sizeof(int));
+         
            scanf("%d", &newarticol->pret);
            newarticol->next = NULL;
           
@@ -119,7 +116,7 @@ int main()
         }
     }
     }
-    else {fclose(f); printf("Ati fost delogat.\n"); return 0;}
+    else {fclose(f); freemeniu(meniu); printf("Ati fost delogat.\n"); return 0;}
    
     
    }
