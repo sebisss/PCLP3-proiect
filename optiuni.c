@@ -36,9 +36,9 @@ void afisaremeniu(Meniu *meniu)
     Articol *articol = meniu->articole;
     for (int i = meniu->numar_articole; i > 0; i--)
     {
-        printf("%s ", articol->nume);
-        printf("%d ", articol->pret);
-        printf("%d\n", articol->numar);
+        printf("\n%s ", articol->nume);
+        printf("%d lei\n", articol->pret);
+        printf(" Numarul articolului: %d\n", articol->numar);
         articol = articol->next;
     }
     int n = 5;
@@ -59,8 +59,6 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
         // aux = Lista_Comenzi->Comanda;
         aux = aux->next;
     }
-    printf("Pretul total este: %d", aux->pret);
-    printf("\n");
     Articol *aux2 = aux->articole;
     while (aux2 != NULL)
     {
@@ -68,6 +66,8 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
         printf("Pret: %d\n", aux2->pret);
         aux2 = aux2->next;
     }
+    printf("\n");
+    printf("Pretul total este: %d", aux->pret);
 }
 
 Lista_Comenzi *adaugarecomanda(Lista_Comenzi *listacomanda, Meniu *meniu)
@@ -84,7 +84,7 @@ Lista_Comenzi *adaugarecomanda(Lista_Comenzi *listacomanda, Meniu *meniu)
     while (1)
     {
         char *c = malloc(sizeof(4));
-        printf("Alegeti optiunea dorita\n");
+        printf("\nAlegeti optiunea dorita\n");
         printf("Tastati 0 pentru iesire\n");
         printf("Tastati numarul din meniu al articolului pentru adaugarea acestuia\n");
         int *b = malloc(sizeof(int));
@@ -92,23 +92,25 @@ Lista_Comenzi *adaugarecomanda(Lista_Comenzi *listacomanda, Meniu *meniu)
         if (*b < 0 || *b > meniu->numar_articole)
         {
             printf("Acest produs este indisponibil\n");
+            free(b);
             continue;
         }
 
-        if (b == 0)
+        if (*b == 0)
             break;
 
         //  printf("%d nr comanda", listacomanda->nr_comenzi);
+        (*b)--;
         newcommand = adaugarearticol(newcommand, *b, meniu);
         free(b);
     }
-    printf("%d nr comanda", listacomanda->nr_comenzi);
+    // printf("%d nr comanda", listacomanda->nr_comenzi);
     if (listacomanda->Comanda != NULL)
         aux->next = newcommand;
     else
         listacomanda->Comanda = newcommand;
     // printf("%d", newcommand->articole->pret);
-    printf("%d Numarul comenzii este:", listacomanda->nr_comenzi);
+    printf("Numarul comenzii este: %d\n", listacomanda->nr_comenzi);
     return listacomanda;
 }
 
@@ -154,7 +156,7 @@ Comanda *adaugarearticol(Comanda *comanda, int k, Meniu *meniu)
     else
         comanda->articole = newarticol;
     comanda->pret = comanda->pret + newarticol->pret;
-    printf("%s", comanda->articole->nume);
+    printf("Ati ales: %s", newarticol->nume);
     return comanda;
 }
 Lista_Comenzi *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
