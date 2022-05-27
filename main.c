@@ -16,7 +16,9 @@ int main()
     ceva->Comanda = NULL;
     printf("sal");
     fflush(stdout);
-    adaugarecomanda(&ceva, meniu);
+    adaugarecomanda(ceva, meniu);
+    //printf("%d", ceva->Comanda->articole->pret);
+    afisarecomanda(ceva, 1);
 
     return 0;
 }

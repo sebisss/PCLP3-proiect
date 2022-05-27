@@ -65,11 +65,11 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
 
 
 
-void adaugarecomanda(Lista_Comenzi** listacomanda, Meniu *meniu){
+Lista_Comenzi* adaugarecomanda(Lista_Comenzi* listacomanda, Meniu *meniu){
     
-    (*listacomanda)->nr_comenzi++;
-    Comanda *aux = (*listacomanda)->Comanda;
-    if((*listacomanda)->Comanda != NULL)
+    listacomanda->nr_comenzi++;
+    Comanda *aux = listacomanda->Comanda;
+    if(listacomanda->Comanda != NULL)
     while(aux->next != NULL)
         aux = aux->next;
 
@@ -84,12 +84,15 @@ void adaugarecomanda(Lista_Comenzi** listacomanda, Meniu *meniu){
         printf("ce ti dau");
         int b;
         scanf("%d", &b);
-        adaugarearticol(&newcommand, b,  meniu);
-         
+        newcommand = adaugarearticol(newcommand, b,  meniu);
+        
     }
-   if((*listacomanda)->Comanda != NULL) aux->next = newcommand;
-
-    
+     //printf("%d", newcommand->pret);
+    if(listacomanda->Comanda != NULL)
+    aux->next = newcommand;
+    else listacomanda->Comanda = newcommand;
+    //printf("%d", newcommand->articole->pret);
+    return listacomanda;
 }
 
 Comanda *plasare(){
@@ -101,7 +104,7 @@ Comanda *plasare(){
     return newcommand;
 }
 
-void adaugarearticol(Comanda **comanda, int k, Meniu* meniu){
+Comanda  *adaugarearticol(Comanda *comanda, int k, Meniu* meniu){
     Articol *articol = meniu->articole;
     while(k > 0){
         articol = articol->next;
@@ -119,14 +122,16 @@ void adaugarearticol(Comanda **comanda, int k, Meniu* meniu){
     }
    // int counter = 0;
 
-    Articol *finalarticole = (*comanda)->articole;
-    while((*comanda)->articole != NULL && finalarticole->next != NULL){
+    Articol *finalarticole = comanda->articole;
+    while(comanda->articole != NULL && finalarticole->next != NULL){
         finalarticole = finalarticole->next;
     //    counter++;
     }
-    if((*comanda)->articole != NULL) finalarticole->next = newarticol;
-    (*comanda)->pret = (*comanda)->pret + newarticol->pret;
-    
+    if(comanda->articole != NULL) finalarticole->next = newarticol;
+    else comanda->articole = newarticol;
+    comanda->pret = comanda->pret + newarticol->pret;
+    printf("%s", comanda->articole->nume);
+    return comanda;
     
 
 

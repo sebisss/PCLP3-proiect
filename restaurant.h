@@ -31,6 +31,6 @@ void inchide_lista(Lista_Comenzi lista_comezi);
 Meniu *init_meniu(FILE *f);
 void afisaremeniu(Meniu *meniu);
 void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda);
-void adaugarearticol(Comanda **comanda, int k, Meniu *meniu);
+Comanda* adaugarearticol(Comanda *comanda, int k, Meniu *meniu);
 Comanda *plasare();
-void adaugarecomanda(Lista_Comenzi **listacomanda, Meniu *meniu);
+Lista_Comenzi* adaugarecomanda(Lista_Comenzi *listacomanda, Meniu *meniu);
