@@ -44,7 +44,7 @@ void afisaremeniu(Meniu *meniu)
     int n = 5;
     while (n != 0)
     {
-        printf("Apasati tasta 0 pentru a va intoarce la meniul principal");
+        printf("Apasati tasta 0 pentru a va intoarce la meniul principal\n");
         scanf("%d", &n);
         if (n == 0)
             return;
@@ -67,7 +67,15 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
         aux2 = aux2->next;
     }
     printf("\n");
-    printf("Pretul total este: %d", aux->pret);
+    printf("Pretul total este: %d\n", aux->pret);
+    int n = 5;
+    while (n != 0)
+    {
+        printf("Apasati tasta 0 pentru a va intoarce la meniul principal:\n");
+        scanf("%d", &n);
+        if (n == 0)
+            return;
+    }
 }
 
 Lista_Comenzi *adaugarecomanda(Lista_Comenzi *listacomanda, Meniu *meniu)
@@ -156,7 +164,7 @@ Comanda *adaugarearticol(Comanda *comanda, int k, Meniu *meniu)
     else
         comanda->articole = newarticol;
     comanda->pret = comanda->pret + newarticol->pret;
-    printf("Ati ales: %s", newarticol->nume);
+    printf("Ati ales: %s\n", newarticol->nume);
     return comanda;
 }
 Lista_Comenzi *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
