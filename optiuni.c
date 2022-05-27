@@ -150,27 +150,48 @@ Lista_Comenzi *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
     Comanda *aux = Lista_de_comenzi->Comanda;
     Comanda *aux2;
     Comanda *aux3;
-    if (nr_comanda == 1)
+    if (nr_comanda + 1 == Lista_de_comenzi->nr_comenzi)
+    {
+        while (aux->next != NULL)
+        {
+            aux2 = aux;
+            aux = aux->next;
+        }
+        while (aux->articole != NULL)
+        {
+            Articol *aux_articol = aux->articole;
+            aux->articole = aux->articole->next;
+            if (aux_articol != NULL)
+                free(aux_articol);
+        }
+        Lista_de_comenzi->nr_comenzi--;
+        aux2->next = NULL;
+        return Lista_de_comenzi;
+    }
+    else if (nr_comanda == 0)
     {
         aux2 = aux;
         aux = aux->next;
         Lista_de_comenzi->Comanda = aux;
         while (aux2->articole != NULL)
         {
-            Articol *aux_articol = aux3->articole;
-            aux3->articole = aux->articole->next;
-            free(aux_articol);
+            Articol *aux_articol = aux2->articole;
+            aux2->articole = aux2->articole->next;
+            if (aux_articol != NULL)
+                free(aux_articol);
         }
-        free(aux2);
+        if (aux2 != NULL)
+            free(aux2);
         Lista_de_comenzi->nr_comenzi--;
         return Lista_de_comenzi;
     }
     Lista_de_comenzi->nr_comenzi--;
     for (int i = 0; i < nr_comanda; i++)
     {
+        aux2 = aux;
         aux = aux->next;
-        if (i == nr_comanda - 2)
-            aux2 = aux;
+        // if (i == nr_comanda - 1)
+        //   aux2 = aux;
     }
     aux3 = aux;
     aux = aux->next;
@@ -179,9 +200,11 @@ Lista_Comenzi *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
     {
         Articol *aux_articol = aux3->articole;
         aux3->articole = aux->articole->next;
-        free(aux_articol);
+        if (aux_articol != NULL)
+            free(aux_articol);
     }
-    free(aux3);
+    if (aux3 != NULL)
+        free(aux3);
 
     return Lista_de_comenzi;
 }

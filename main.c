@@ -33,7 +33,7 @@ int main()
             printf("Introduceti numarul comenzii:\n");
             scanf("%d", &nrcomanda);
             nrcomanda--;
-            if (nrcomanda < Lista_de_comenzi->nr_comenzi)
+            if (nrcomanda < Lista_de_comenzi->nr_comenzi && nrcomanda >= 0)
                 afisarecomanda(Lista_de_comenzi, nrcomanda);
             else
                 printf("nu avme sefu");
@@ -44,7 +44,7 @@ int main()
             printf("Introduceti numarul comenzii:\n");
             scanf("%d", &nrcomanda);
             nrcomanda--;
-            if (nrcomanda < Lista_de_comenzi->nr_comenzi && nrcomanda > 0)
+            if (nrcomanda < Lista_de_comenzi->nr_comenzi && nrcomanda >= 0)
                 anulare_comanda(Lista_de_comenzi, nrcomanda);
             else
                 printf("N-avem");
