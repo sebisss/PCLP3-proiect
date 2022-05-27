@@ -13,12 +13,14 @@ int main()
     Lista_Comenzi *ceva; 
     ceva= (Lista_Comenzi *)malloc(sizeof(Lista_Comenzi));
     ceva->nr_comenzi = 0;
+    printf("%d", ceva->nr_comenzi);
     ceva->Comanda = NULL;
     printf("sal");
     fflush(stdout);
     adaugarecomanda(ceva, meniu);
+   // printf("%d", ceva->nr_comenzi);
     //printf("%d", ceva->Comanda->articole->pret);
-    afisarecomanda(ceva, 1);
+    afisarecomanda(ceva, 0);
 
     return 0;
 }

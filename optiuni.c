@@ -66,15 +66,17 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
 
 
 Lista_Comenzi* adaugarecomanda(Lista_Comenzi* listacomanda, Meniu *meniu){
-    
-    listacomanda->nr_comenzi++;
+    printf("%d nr comanda", listacomanda->nr_comenzi);
+    listacomanda->nr_comenzi = listacomanda->nr_comenzi + 1;
+    int c = listacomanda->nr_comenzi;
     Comanda *aux = listacomanda->Comanda;
     if(listacomanda->Comanda != NULL)
     while(aux->next != NULL)
         aux = aux->next;
 
-   
+    printf("%d nr comanda ba", listacomanda->nr_comenzi);
     Comanda *newcommand = plasare();
+    printf("%d nr comanda", listacomanda->nr_comenzi);
     while(1){
         char *c = malloc(sizeof(4));
         printf("mai doresti cv bossule:\n");
@@ -84,10 +86,11 @@ Lista_Comenzi* adaugarecomanda(Lista_Comenzi* listacomanda, Meniu *meniu){
         printf("ce ti dau");
         int b;
         scanf("%d", &b);
+        printf("%d nr comanda", listacomanda->nr_comenzi);
         newcommand = adaugarearticol(newcommand, b,  meniu);
-        
+        printf("%d nr comanda", listacomanda->nr_comenzi);
     }
-     //printf("%d", newcommand->pret);
+    
     if(listacomanda->Comanda != NULL)
     aux->next = newcommand;
     else listacomanda->Comanda = newcommand;
