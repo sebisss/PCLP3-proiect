@@ -41,6 +41,14 @@ void afisaremeniu(Meniu *meniu)
         printf("%d\n", articol->numar);
         articol = articol->next;
     }
+    int n = 5;
+    while (n != 0)
+    {
+        printf("Apasati tasta 0 pentru a va intoarce la meniul principal");
+        scanf("%d", &n);
+        if (n == 0)
+            return;
+    }
 }
 void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
 {
@@ -64,31 +72,34 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
 
 Lista_Comenzi *adaugarecomanda(Lista_Comenzi *listacomanda, Meniu *meniu)
 {
-    printf("%d nr comanda", listacomanda->nr_comenzi);
+    // printf("%d nr comanda", listacomanda->nr_comenzi);
     listacomanda->nr_comenzi = listacomanda->nr_comenzi + 1;
 
     Comanda *aux = listacomanda->Comanda;
     if (listacomanda->Comanda != NULL)
         while (aux->next != NULL)
             aux = aux->next;
-
-    printf("%d nr comanda ba", listacomanda->nr_comenzi);
     Comanda *newcommand = plasare();
-    printf("%d nr comanda", listacomanda->nr_comenzi);
+    //   printf("%d nr comanda", listacomanda->nr_comenzi);
     while (1)
     {
         char *c = malloc(sizeof(4));
-        printf("mai doresti cv bossule:\n");
-        scanf("%s", c);
-
-        if (strcmp(c, "nu") == 0)
-            break;
-        printf("ce ti dau");
+        printf("Alegeti optiunea dorita\n");
+        printf("Tastati 0 pentru iesire\n");
+        printf("Tastati numarul din meniu al articolului pentru adaugarea acestuia\n");
         int *b = malloc(sizeof(int));
         scanf("%d", b);
-        printf("%d nr comanda", listacomanda->nr_comenzi);
+        if (*b < 0 || *b > meniu->numar_articole)
+        {
+            printf("Acest produs este indisponibil\n");
+            continue;
+        }
+
+        if (b == 0)
+            break;
+
+        //  printf("%d nr comanda", listacomanda->nr_comenzi);
         newcommand = adaugarearticol(newcommand, *b, meniu);
-        printf("%d nr comanda", listacomanda->nr_comenzi);
         free(b);
     }
     printf("%d nr comanda", listacomanda->nr_comenzi);
@@ -97,6 +108,7 @@ Lista_Comenzi *adaugarecomanda(Lista_Comenzi *listacomanda, Meniu *meniu)
     else
         listacomanda->Comanda = newcommand;
     // printf("%d", newcommand->articole->pret);
+    printf("%d Numarul comenzii este:", listacomanda->nr_comenzi);
     return listacomanda;
 }
 
@@ -145,7 +157,7 @@ Comanda *adaugarearticol(Comanda *comanda, int k, Meniu *meniu)
     printf("%s", comanda->articole->nume);
     return comanda;
 }
-Lista_Comenzi  *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
+Lista_Comenzi *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
 {
     Comanda *aux = Lista_de_comenzi->Comanda;
     Comanda *aux2;
@@ -185,27 +197,29 @@ Lista_Comenzi  *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
         Lista_de_comenzi->nr_comenzi--;
         return Lista_de_comenzi;
     }
-    else{
-    Lista_de_comenzi->nr_comenzi--;
-    for (int i = 0; i < nr_comanda; i++)
+    else
     {
-        aux2 = aux;
+        Lista_de_comenzi->nr_comenzi--;
+        for (int i = 0; i < nr_comanda; i++)
+        {
+            aux2 = aux;
+            aux = aux->next;
+            // if (i == nr_comanda - 1)
+            //   aux2 = aux;
+        }
+        aux3 = aux;
         aux = aux->next;
-        // if (i == nr_comanda - 1)
-        //   aux2 = aux;
-    }
-    aux3 = aux;
-    aux = aux->next;
-    aux2->next = aux;
-    while (aux3->articole != NULL)
-    {
-        Articol *aux_articol = aux3->articole;
-        aux3->articole = aux->articole->next;
-        if (aux_articol != NULL)
-            free(aux_articol);
-    }
-    if (aux3 != NULL)
-        free(aux3);
+        aux2->next = aux;
+        while (aux3->articole != NULL)
+        {
+            Articol *aux_articol = aux3->articole;
+            aux3->articole = aux->articole->next;
+            if (aux_articol != NULL)
+                free(aux_articol);
+        }
+        if (aux3 != NULL)
+            free(aux3);
 
-    return Lista_de_comenzi; }
+        return Lista_de_comenzi;
+    }
 }
