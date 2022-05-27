@@ -44,8 +44,6 @@ void afisaremeniu(Meniu *meniu)
 }
 void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
 {
-    if (nrcomanda > Lista_Comenzi->nr_comenzi)
-        return;
     Comanda *aux = Lista_Comenzi->Comanda;
     for (int i = 0; i < nrcomanda; i++)
     {
@@ -55,11 +53,12 @@ void afisarecomanda(Lista_Comenzi *Lista_Comenzi, int nrcomanda)
     }
     printf("Pretul total este: %d", aux->pret);
     printf("\n");
-    while (aux->articole != NULL)
+    Articol *aux2 = aux->articole;
+    while (aux2 != NULL)
     {
-        printf("Produs: %s\n", aux->articole->nume);
-        printf("Pret: %d\n", aux->articole->pret);
-        aux->articole = aux->articole->next;
+        printf("Produs: %s\n", aux2->nume);
+        printf("Pret: %d\n", aux2->pret);
+        aux2 = aux2->next;
     }
 }
 
@@ -146,30 +145,43 @@ Comanda *adaugarearticol(Comanda *comanda, int k, Meniu *meniu)
     printf("%s", comanda->articole->nume);
     return comanda;
 }
-Lista_Comenzi anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
+Lista_Comenzi *anulare_comanda(Lista_Comenzi *Lista_de_comenzi, int nr_comanda)
 {
-    if (nr_comanda < Lista_de_comenzi->nr_comenzi)
+    Comanda *aux = Lista_de_comenzi->Comanda;
+    Comanda *aux2;
+    Comanda *aux3;
+    if (nr_comanda == 1)
     {
-        Comanda *aux = Lista_de_comenzi->Comanda;
-        Comanda *aux2;
-        Lista_de_comenzi->nr_comenzi--;
-        for (int i = 0; i < nr_comanda; i++)
-        {
-            aux = aux->next;
-            if (i == nr_comanda - 2)
-                aux2 = aux;
-        }
-        Comanda *aux3 = aux;
+        aux2 = aux;
         aux = aux->next;
-        aux2->next = aux;
-        while (aux3->articole != NULL)
+        Lista_de_comenzi->Comanda = aux;
+        while (aux2->articole != NULL)
         {
             Articol *aux_articol = aux3->articole;
             aux3->articole = aux->articole->next;
             free(aux_articol);
         }
-        free(aux3);
+        free(aux2);
+        Lista_de_comenzi->nr_comenzi--;
+        return Lista_de_comenzi;
     }
-    else
-        printf("Nu exista comanda bosule, prea mare valoare ai");
+    Lista_de_comenzi->nr_comenzi--;
+    for (int i = 0; i < nr_comanda; i++)
+    {
+        aux = aux->next;
+        if (i == nr_comanda - 2)
+            aux2 = aux;
+    }
+    aux3 = aux;
+    aux = aux->next;
+    aux2->next = aux;
+    while (aux3->articole != NULL)
+    {
+        Articol *aux_articol = aux3->articole;
+        aux3->articole = aux->articole->next;
+        free(aux_articol);
+    }
+    free(aux3);
+
+    return Lista_de_comenzi;
 }

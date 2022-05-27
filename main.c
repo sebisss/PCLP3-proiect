@@ -15,7 +15,7 @@ int main()
         printf("1.Afisati meniul\n");
         printf("2.Plasati o comanda\n");
         printf("3.Afisati o comanda\n");
-        printf("Alegeti optiunea dorita:\n");
+        printf("4.Anuleaza o comanda\n");
         printf("Alegeti optiunea dorita:\n");
         printf("9.Iesire\n");
         scanf("%d", &n);
@@ -33,7 +33,21 @@ int main()
             printf("Introduceti numarul comenzii:\n");
             scanf("%d", &nrcomanda);
             nrcomanda--;
-            afisarecomanda(Lista_de_comenzi, nrcomanda);
+            if (nrcomanda < Lista_de_comenzi->nr_comenzi)
+                afisarecomanda(Lista_de_comenzi, nrcomanda);
+            else
+                printf("nu avme sefu");
+        }
+        if (n == 4)
+        {
+            int nrcomanda;
+            printf("Introduceti numarul comenzii:\n");
+            scanf("%d", &nrcomanda);
+            nrcomanda--;
+            if (nrcomanda < Lista_de_comenzi->nr_comenzi && nrcomanda > 0)
+                anulare_comanda(Lista_de_comenzi, nrcomanda);
+            else
+                printf("N-avem");
         }
     }
 
